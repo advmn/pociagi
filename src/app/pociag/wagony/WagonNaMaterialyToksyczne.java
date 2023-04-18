@@ -1,19 +1,28 @@
 package app.pociag.wagony;
 
 public class WagonNaMaterialyToksyczne extends WagonTowarowyCiezki {
-    private double iloscMaterialowToksycznych;
 
-    public WagonNaMaterialyToksyczne(double waga, double wagaNetto, double wagaBrutto, double iloscMaterialowToksycznych) {
-        super(waga, wagaNetto, wagaBrutto);
-        this.iloscMaterialowToksycznych = iloscMaterialowToksycznych;
+    private double wagaSkrzyni;
+    private double iloscSkrzyn;
+
+    public WagonNaMaterialyToksyczne(double wagaPustegoWagonu, double maksymalnaWagaWagonu, double wagaSkrzyni) {
+        super(wagaPustegoWagonu, maksymalnaWagaWagonu, "Materialy toksyczne");
+        this.wagaSkrzyni = wagaSkrzyni;
     }
 
-    public double getIloscMaterialowToksycznych() {
-        return iloscMaterialowToksycznych;
+    public double getWagaSkrzyni() {
+        return wagaSkrzyni;
     }
 
-    public void setIloscMaterialowToksycznych(double iloscMaterialowToksycznych) {
-        this.iloscMaterialowToksycznych = iloscMaterialowToksycznych;
+    public double getIloscSkrzyn() {
+        return iloscSkrzyn;
     }
+
+    public void setIloscSkrzyn(double iloscSkrzyn) {
+        this.iloscSkrzyn = iloscSkrzyn;
+    }
+
+
+
 }
 

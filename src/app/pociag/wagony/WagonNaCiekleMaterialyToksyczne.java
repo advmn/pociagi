@@ -4,9 +4,9 @@ public class WagonNaCiekleMaterialyToksyczne extends WagonTowarowyCiezki {
     private double pojemnoscZbiornika;
     private double iloscCieklychMaterialowToksycznych;
 
-    public WagonNaCiekleMaterialyToksyczne(double waga, double wagaNetto, double wagaBrutto, double pojemnoscZbiornika, double iloscCieklychMaterialowToksycznych) {
-        super(waga, wagaNetto, wagaBrutto);
-        this.pojemnoscZbiornika = pojemnoscZbiornika;
+    public WagonNaCiekleMaterialyToksyczne(double wagaPustegoWagonu, double maksymalnaWagaWagonu, double maksymalnaPojemnoscZbiornika, double iloscCieklychMaterialowToksycznych) {
+        super(wagaPustegoWagonu, maksymalnaWagaWagonu, "Toksyczne materialy");
+        this.pojemnoscZbiornika = maksymalnaPojemnoscZbiornika;
         this.iloscCieklychMaterialowToksycznych = iloscCieklychMaterialowToksycznych;
     }
     public double getPojemnoscZbiornika() {

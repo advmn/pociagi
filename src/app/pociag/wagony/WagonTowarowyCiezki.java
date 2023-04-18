@@ -1,22 +1,11 @@
 package app.pociag.wagony;
 
-public class WagonTowarowyCiezki extends WagonTowarowyPodstawowy {
-    private double maksymalneObciazenie;
+public abstract class WagonTowarowyCiezki extends Wagon {
     private String rodzajTowaru;
 
-    public WagonTowarowyCiezki(double waga, double wagaNetto, double wagaBrutto, double maksymalneObciazenie, String rodzajTowaru) {
-        super(waga, wagaNetto, wagaBrutto);
-        this.maksymalneObciazenie = maksymalneObciazenie;
+    public WagonTowarowyCiezki(double wagaPustegoWagonu, double maksymalnaWagaWagonu, String rodzajTowaru) {
+        super(wagaPustegoWagonu, maksymalnaWagaWagonu);
         this.rodzajTowaru = rodzajTowaru;
-    }
-
-    // Getters and setters
-    public double getMaksymalneObciazenie() {
-        return maksymalneObciazenie;
-    }
-
-    public void setMaksymalneObciazenie(double maksymalneObciazenie) {
-        this.maksymalneObciazenie = maksymalneObciazenie;
     }
 
     public String getRodzajTowaru() {
@@ -25,5 +14,10 @@ public class WagonTowarowyCiezki extends WagonTowarowyPodstawowy {
 
     public void setRodzajTowaru(String rodzajTowaru) {
         this.rodzajTowaru = rodzajTowaru;
+    }
+
+    @Override
+    public void wyswietlInformacje() {
+
     }
 }

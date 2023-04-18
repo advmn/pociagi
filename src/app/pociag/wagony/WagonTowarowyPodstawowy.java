@@ -1,29 +1,14 @@
 package app.pociag.wagony;
 
 public class WagonTowarowyPodstawowy extends Wagon {
-    private double wagaNetto;
-    private double wagaBrutto;
 
-    public WagonTowarowyPodstawowy(double waga, double wagaNetto, double wagaBrutto) {
-        super(waga);
-        this.wagaNetto = wagaNetto;
-        this.wagaBrutto = wagaBrutto;
+
+    public WagonTowarowyPodstawowy(double wagaPustegoWagonu, double wagaPelnegoWagonu) {
+        super(wagaPustegoWagonu, wagaPelnegoWagonu);
     }
 
-    // Getters and setters
-    public double getWagaNetto() {
-        return wagaNetto;
-    }
+    @Override
+    public void wyswietlInformacje() {
 
-    public void setWagaNetto(double wagaNetto) {
-        this.wagaNetto = wagaNetto;
-    }
-
-    public double getWagaBrutto() {
-        return wagaBrutto;
-    }
-
-    public void setWagaBrutto(double wagaBrutto) {
-        this.wagaBrutto = wagaBrutto;
     }
 }

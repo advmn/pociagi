@@ -1,18 +1,25 @@
 package app.pociag.wagony;
 
 public class WagonNaMaterialyWybuchowe extends WagonTowarowyCiezki {
-    private double iloscMateriowWybuchowych;
 
-    public WagonNaMaterialyWybuchowe(double waga, double wagaNetto, double wagaBrutto, double iloscMateriowWybuchowych) {
-        super(waga, wagaNetto, wagaBrutto);
-        this.iloscMateriowWybuchowych = iloscMateriowWybuchowych;
+    private double ilośćStrzynZMaterialamiWybuchowymi;
+    private double wagaJednejSkrzyni;
+
+
+    public WagonNaMaterialyWybuchowe(double wagaPustegoWagonu, double maksymalnaWagaWagonu, double wagaJednejSkrzyni) {
+        super(wagaPustegoWagonu, maksymalnaWagaWagonu, "Materialy Wybuchowe");
+        this.wagaJednejSkrzyni = wagaJednejSkrzyni;
     }
 
-    public double getIloscMateriowWybuchowych() {
-        return iloscMateriowWybuchowych;
+    public double getWagaJednejSkrzyni() {
+        return wagaJednejSkrzyni;
     }
 
-    public void setIloscMateriowWybuchowych(double iloscMateriowWybuchowych) {
-        this.iloscMateriowWybuchowych = iloscMateriowWybuchowych;
+    public double getIlośćStrzynZMaterialamiWybuchowymi() {
+        return ilośćStrzynZMaterialamiWybuchowymi;
+    }
+
+    public void setIlośćStrzynZMaterialamiWybuchowymi(double ilośćStrzynZMaterialamiWybuchowymi) {
+        this.ilośćStrzynZMaterialamiWybuchowymi = ilośćStrzynZMaterialamiWybuchowymi;
     }
 }

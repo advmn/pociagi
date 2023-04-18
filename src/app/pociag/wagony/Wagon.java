@@ -3,33 +3,36 @@ package app.pociag.wagony;
 public abstract class Wagon {
     private static int counter = 0;
     protected int numerIdentyfikacyjny;
-    protected double wagaNetto;
-    protected double wagaBrutto;
+    protected double wagePustegoWagonu;
+    protected double maksymalnaWagaWagonu;
 
-    public Wagon(double wagaNetto, double wagaBrutto) {
+    protected double obecnaWagaWagonu;
+
+    public Wagon(double wagaPustegoWagonu, double wagaPelnegoWagonu) {
         this.numerIdentyfikacyjny = ++counter;
-        this.wagaNetto = wagaNetto;
-        this.wagaBrutto = wagaBrutto;
+        this.wagePustegoWagonu = wagaPustegoWagonu;
+        this.maksymalnaWagaWagonu = wagaPelnegoWagonu;
+        this.obecnaWagaWagonu = wagaPelnegoWagonu;
     }
 
     public int getNumerIdentyfikacyjny() {
         return numerIdentyfikacyjny;
     }
 
-    public double getWagaNetto() {
-        return wagaNetto;
+    public double getWagePustegoWagonu() {
+        return wagePustegoWagonu;
     }
 
-    public void setWagaNetto(double wagaNetto) {
-        this.wagaNetto = wagaNetto;
+    public void setWagePustegoWagonu(double wagePustegoWagonu) {
+        this.wagePustegoWagonu = wagePustegoWagonu;
     }
 
-    public double getWagaBrutto() {
-        return wagaBrutto;
+    public double getMaksymalnaWagaWagonu() {
+        return maksymalnaWagaWagonu;
     }
 
-    public void setWagaBrutto(double wagaBrutto) {
-        this.wagaBrutto = wagaBrutto;
+    public void setMaksymalnaWagaWagonu(double maksymalnaWagaWagonu) {
+        this.maksymalnaWagaWagonu = maksymalnaWagaWagonu;
     }
 
     public abstract void wyswietlInformacje();

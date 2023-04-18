@@ -2,6 +2,7 @@ package app.stacje;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class StacjaKolejowa {
     private String nazwa;
@@ -41,7 +42,9 @@ public class StacjaKolejowa {
         }
     }
 
-    class Polaczenie {
+
+
+    public static class Polaczenie {
         private StacjaKolejowa stacjaDocelowa;
         private int odleglosc;
 
@@ -57,5 +60,10 @@ public class StacjaKolejowa {
         public int getOdleglosc() {
             return odleglosc;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nazwa);
     }
 }

@@ -1,11 +1,11 @@
 package app.pociag.wagony;
 
-public class WagonChlodniczy extends WagonTowarowyPodstawowy implements Elektryczny {
+public class WagonChlodniczy extends Wagon {
     private double temperatura;
     private boolean podlaczonyDoSieciElektrycznej;
 
-    public WagonChlodniczy(double waga, double wagaNetto, double wagaBrutto, double temperatura) {
-        super(waga, wagaNetto, wagaBrutto);
+    public WagonChlodniczy(double wagaNetto, double wagaBrutto) {
+        super(wagaNetto, wagaBrutto);
         this.temperatura = temperatura;
         this.podlaczonyDoSieciElektrycznej = false;
     }
@@ -19,13 +19,16 @@ public class WagonChlodniczy extends WagonTowarowyPodstawowy implements Elektryc
         this.temperatura = temperatura;
     }
 
-    @Override
     public boolean isPodlaczonyDoSieciElektrycznej() {
         return podlaczonyDoSieciElektrycznej;
     }
 
-    @Override
     public void setPodlaczonyDoSieciElektrycznej(boolean podlaczonyDoSieciElektrycznej) {
         this.podlaczonyDoSieciElektrycznej = podlaczonyDoSieciElektrycznej;
+    }
+
+    @Override
+    public void wyswietlInformacje() {
+
     }
 }

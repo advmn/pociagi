@@ -43,12 +43,12 @@ public class Symulacja {
     }
 
     public void aktualizujProcentUkonczonejDrogi(Pociag pociag, double nowyProcentUkonczonejDrogi) {
-        pociag.setProcentUkonczonejDrogi(nowyProcentUkonczonejDrogi);
+//        pociag.setProcentUkonczonejDrogi(nowyProcentUkonczonejDrogi);
     }
 
     public void przemiescPociagDoStacjiDocelowej(Pociag pociag) {
         if (pociag.getProcentUkonczonejDrogi() == 100.0) {
-            pociag.setStacjaZrodlowa(pociag.getStacjaDocelowa());
+//            pociag.setStacjaZrodlowa(pociag.getStacjaDocelowa());
         }
     }
 

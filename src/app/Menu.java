@@ -1,7 +1,7 @@
 package app;
 
 import app.pociag.Pociag;
-import app.pociag.wagony.WagonPasazerski;
+import app.pociag.wagony.Wagon;
 import app.stacje.StacjaKolejowa;
 
 import java.util.Scanner;
@@ -99,13 +99,13 @@ public class Menu {
                 int miejscaSiedzace = scanner.nextInt();
                 System.out.println("Podaj liczbę miejsc stojących:");
                 int miejscaStojace = scanner.nextInt();
-                nowyWagon = new WagonPasazerski()WagonPasazerski(miejscaSiedzace, miejscaStojace);
+//                nowyWagon = new WagonPasazerski(miejscaSiedzace, miejscaStojace);
                 break;
             case 2:
 
                 System.out.println("Podaj przestrzeń ładunkową:");
                 double przestrzenLadunkowa = scanner.nextDouble();
-                nowyWagon = new WagonPocztowy(przestrzenLadunkowa);
+//                nowyWagon = new WagonPocztowy(przestrzenLadunkowa);
                 break;
 
             default:
@@ -113,10 +113,8 @@ public class Menu {
                 return;
         }
 
-        Wagon.add(nowyWagon);
-        System.out.println("Wagon został dodany.");
+//        Wagon.add(nowyWagon);
+//        System.out.println("Wagon został dodany.");
     }
-}
-
 
 }

@@ -5,7 +5,7 @@ public class WagonRestauracyjny extends Wagon {
     private boolean podlaczenieDoSieciElektrycznej;
 
     public WagonRestauracyjny(double waga, int liczbaMiejscSiedzacych, boolean podlaczenieDoSieciElektrycznej) {
-        super(waga);
+        super(waga, waga);
         this.liczbaMiejscSiedzacych = liczbaMiejscSiedzacych;
         this.podlaczenieDoSieciElektrycznej = podlaczenieDoSieciElektrycznej;
     }
@@ -25,5 +25,10 @@ public class WagonRestauracyjny extends Wagon {
 
     public void setPodlaczenieDoSieciElektrycznej(boolean podlaczenieDoSieciElektrycznej) {
         this.podlaczenieDoSieciElektrycznej = podlaczenieDoSieciElektrycznej;
+    }
+
+    @Override
+    public void wyswietlInformacje() {
+
     }
 }

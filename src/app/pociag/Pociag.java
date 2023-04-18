@@ -14,15 +14,20 @@ public class Pociag {
     private List<Wagon> wagony;
     private StacjaKolejowa stacjaZrodlowa;
     private StacjaKolejowa stacjaDocelowa;
-    private double procentUkonczonejDrogi;
 
-    public Pociag(Lokomotywa lokomotywa, StacjaKolejowa stacjaZrodlowa, StacjaKolejowa stacjaDocelowa) {
+    private List<StacjaKolejowa> stacjePosrednie;
+    private double procentUkonczonejDrogi;
+    private double procentUkonczonejDrogiPomiedzyStacjami;
+
+    public Pociag(Lokomotywa lokomotywa, StacjaKolejowa stacjaZrodlowa, StacjaKolejowa stacjaDocelowa, List<StacjaKolejowa> stacjePosrednie) {
         this.id = ++licznikID;
         this.lokomotywa = lokomotywa;
         this.wagony = new ArrayList<>();
         this.stacjaZrodlowa = stacjaZrodlowa;
         this.stacjaDocelowa = stacjaDocelowa;
         this.procentUkonczonejDrogi = 0;
+        this.procentUkonczonejDrogiPomiedzyStacjami = 0;
+        this.stacjePosrednie = stacjePosrednie;
     }
 
     // Gettery i settery
@@ -43,6 +48,9 @@ public class Pociag {
     }
 
     public void setWagony(List<Wagon> wagony) {
+        if (wagony.size() > lokomotywa.getMaxLiczbaWagonow()) {
+//            TODO throw exception
+        }
         this.wagony = wagony;
     }
 
@@ -50,34 +58,20 @@ public class Pociag {
         return stacjaZrodlowa;
     }
 
-    public void setStacjaZrodlowa(StacjaKolejowa stacjaZrodlowa) {
-        this.stacjaZrodlowa = stacjaZrodlowa;
-    }
-
     public StacjaKolejowa getStacjaDocelowa() {
         return stacjaDocelowa;
-    }
-
-    public void setStacjaDocelowa(StacjaKolejowa stacjaDocelowa) {
-        this.stacjaDocelowa = stacjaDocelowa;
     }
 
     public double getProcentUkonczonejDrogi() {
         return procentUkonczonejDrogi;
     }
 
-    public void setProcentUkonczonejDrogi(double procentUkonczonejDrogi) {
-        this.procentUkonczonejDrogi = procentUkonczonejDrogi;
-    }
-
     // Metody
-    public boolean dodajWagon(Wagon wagon) {
-        if (wagony.size() < lokomotywa.getMaxLiczbaWagonow()) {
-            wagony.add(wagon);
-            return true;
-        } else {
-            return false;
+    public void dodajWagon(Wagon wagon) {
+        if (wagony.size() + 1 > lokomotywa.getMaxLiczbaWagonow()) {
+//        TODO thorw exception
         }
+        wagony.add(wagon);
     }
 
     public boolean usunWagon(Wagon wagon) {

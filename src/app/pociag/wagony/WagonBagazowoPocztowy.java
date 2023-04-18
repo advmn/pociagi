@@ -1,30 +1,35 @@
 package app.pociag.wagony;
 
 public class WagonBagazowoPocztowy extends Wagon {
-    private double pojemnoscBagazu; // w metrach sześciennych
-    private int liczbaSkrzynPocztowych;
+    private double wagaBagazu; // w metrach sześciennych
+    private double wagaSkrzynPocztowych;
 
-    public WagonBagazowoPocztowy(double waga, double pojemnoscBagazu, int liczbaSkrzynPocztowych) {
-        super(waga);
-        this.pojemnoscBagazu = pojemnoscBagazu;
-        this.liczbaSkrzynPocztowych = liczbaSkrzynPocztowych;
+    public WagonBagazowoPocztowy(double wagaPustegoWagonu, double maksymalnaWagaWagonu, double wagaBagazu, double wagaSkrzynPocztowych) {
+        super(wagaPustegoWagonu, maksymalnaWagaWagonu);
+        this.wagaBagazu = wagaBagazu;
+        this.wagaSkrzynPocztowych = wagaSkrzynPocztowych;
     }
 
     // Getters and setters
-    public double getPojemnoscBagazu() {
-        return pojemnoscBagazu;
+    public double getWagaBagazu() {
+        return wagaBagazu;
     }
 
-    public void setPojemnoscBagazu(double pojemnoscBagazu) {
-        this.pojemnoscBagazu = pojemnoscBagazu;
+    public void setWagaBagazu(double wagaBagazu) {
+        this.wagaBagazu = wagaBagazu;
     }
 
-    public int getLiczbaSkrzynPocztowych() {
-        return liczbaSkrzynPocztowych;
+    public double getWagaSkrzynPocztowych() {
+        return wagaSkrzynPocztowych;
     }
 
-    public void setLiczbaSkrzynPocztowych(int liczbaSkrzynPocztowych) {
-        this.liczbaSkrzynPocztowych = liczbaSkrzynPocztowych;
+    public void setWagaSkrzynPocztowych(double wagaSkrzynPocztowych) {
+        this.wagaSkrzynPocztowych = wagaSkrzynPocztowych;
+    }
+
+    @Override
+    public void wyswietlInformacje() {
+
     }
 }
 
