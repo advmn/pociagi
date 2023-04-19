@@ -17,38 +17,57 @@ public class Main {
 
         List<StacjaKolejowa> stacje = new ArrayList<>();
 
-        for (int i = 0; i < 100; i++) {
-            stacje.add(new StacjaKolejowa(UUID.randomUUID().toString()));
-        }
+//        for (int i = 0; i < 100; i++) {
+//            stacje.add(new StacjaKolejowa(UUID.randomUUID().toString()));
+//        }
 
         Random numerStacji = new Random();
         Random iloścPolaczen = new Random();
         Random odleglosc = new Random();
 
-        stacje.forEach(stacja -> {
-            int polaczenia = iloścPolaczen.nextInt(3);
-            Stack<Integer> stosNumerkow = new Stack<>();
-            for (int i = 0; i < polaczenia; i++) {
+        stacje.add(new StacjaKolejowa("krakow glowny"));
+        stacje.add(new StacjaKolejowa("krakow mydlniki"));
+        stacje.add(new StacjaKolejowa("krakow zablocie"));
+        stacje.add(new StacjaKolejowa("krakow bronowice"));
+        stacje.add(new StacjaKolejowa("krakow zabierzow"));
 
-                int odl = odleglosc.nextInt(200) + 10;
-                int indeksStacji = numerStacji.nextInt(stacje.size());
-                while (stosNumerkow.contains(indeksStacji) || indeksStacji == stacje.indexOf(stacja)) {
-                    indeksStacji = numerStacji.nextInt(stacje.size());
-                }
-                stosNumerkow.push(indeksStacji);
-                StacjaKolejowa stj = stacje.get(indeksStacji);
-                stacja.dodajPolaczenie(stj, odl);
+        for (int i = 0; i < stacje.size(); i++) {
+            if (i + 1 < stacje.size()) {
+                stacje.get(i).dodajPolaczenie(stacje.get(i + 1), 12);
             }
-        });
+            if (i >= 1) {
+                stacje.get(i).dodajPolaczenie(stacje.get(i - 1), 12);
+            }
 
-        StacjaKolejowa stacjaZrodlowa = stacje.get(numerStacji.nextInt(stacje.size()));
-        StacjaKolejowa stacjaDocelowa = stacje.get(numerStacji.nextInt(stacje.size()));
-        Lokomotywa lokomotywa = new Lokomotywa("Ciufa", new StacjaKolejowa("Czarnobyl"), stacjaZrodlowa, stacjaDocelowa, 10, 40000, 4, 150);
+        }
+
+//        stacje.forEach(stacja -> {
+//            int polaczenia = iloścPolaczen.nextInt(3);
+//            Stack<Integer> stosNumerkow = new Stack<>();
+//            for (int i = 0; i < polaczenia; i++) {
+//
+//                int odl = odleglosc.nextInt(200) + 10;
+//                int indeksStacji = numerStacji.nextInt(stacje.size());
+//                while (stosNumerkow.contains(indeksStacji) || indeksStacji == stacje.indexOf(stacja)) {
+//                    indeksStacji = numerStacji.nextInt(stacje.size());
+//                }
+//                stosNumerkow.push(indeksStacji);
+//                StacjaKolejowa stj = stacje.get(indeksStacji);
+//                stacja.dodajPolaczenie(stj, odl);
+//            }
+//        });
+
+        StacjaKolejowa stacjaZrodlowa = stacje.get(0);
+        StacjaKolejowa stacjaDocelowa = stacje.get(stacje.size() - 1);
+        Lokomotywa lokomotywa = new Lokomotywa("Ciufa", new StacjaKolejowa("Czarnobyl"), stacjaZrodlowa, stacjaDocelowa, 10, 400000, 4, 30);
         List<StacjaKolejowa> stacjePosrednie = new ArrayList<>();
         Stack<StacjaKolejowa> stosOdwiedzonychStacji = new Stack<>();
 
-        znajdzPolaczenie(stacjePosrednie, stacjaZrodlowa, stacjaDocelowa, stosOdwiedzonychStacji);
+//        znajdzPolaczenie(stacjePosrednie, stacjaZrodlowa, stacjaDocelowa, stosOdwiedzonychStacji);
 
+        for (int i = 1; i < stacje.size() - 1; i++) {
+            stacjePosrednie.add(stacje.get(i));
+        }
         Pociag pociag = new Pociag(lokomotywa, stacjaZrodlowa, stacjaDocelowa, stacjePosrednie);
 
         WagonPasazerski wagonPasazerski = new WagonPasazerski(10000, 12000);
@@ -62,9 +81,12 @@ public class Main {
         pociag.dodajWagon(wagonPasazerski);
         pociag.dodajWagon(wagonPasazerski1);
         pociag.dodajWagon(wagonPasazerski3);
-        pociag.dodajWagon(wagonPasazerski2);
+
 
         System.out.println("pociag");
+
+        Thread thread = new Thread(pociag);
+        thread.start();
 
 
 //        while (true) {
@@ -85,10 +107,10 @@ public class Main {
 //
 //            switch (wybor) {
 //                case 1:
-                    menu.dodajWagon();
+//                    menu.dodajWagon();
 //                    break;
 //                case 2:
-                    menu.wyswietlListeWagonow();
+//                    menu.wyswietlListeWagonow();
 //                    break;
 //                case 3:
 //                    menu.dodajPociag();
@@ -118,7 +140,7 @@ public class Main {
 //                default:
 //                    System.out.println("Nieprawidłowy wybór. Spróbuj ponownie.");
 //            }
-        }
+//        }
     }
 
     private static void znajdzPolaczenie(List<StacjaKolejowa> stacje, StacjaKolejowa stacjaZrodlowa, StacjaKolejowa stacjaDocelowa, Stack<StacjaKolejowa> odwiedzoneStacje) {

@@ -6,10 +6,7 @@ import app.stacje.StacjaKolejowa;
 import app.wyjatki.PrzekroczonoMaksymalnaWagePociagu;
 import app.wyjatki.PrzekroczonyLimitIlosciWagonow;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class Pociag implements Runnable {
     private int id;
@@ -26,6 +23,7 @@ public class Pociag implements Runnable {
     private double procentUkonczonejDrogiPomiedzyStacjami;
 
     private int dlugoscTrasy = 0;
+    private int pokonanaTrasa = 0;
 
 
     public Pociag(Lokomotywa lokomotywa, StacjaKolejowa stacjaZrodlowa, StacjaKolejowa stacjaDocelowa, List<StacjaKolejowa> stacjePosrednie) {
@@ -124,46 +122,82 @@ public class Pociag implements Runnable {
 
     @Override
     public void run() {
-        StacjaKolejowa obecnaStacja = stacjaZrodlowa;
-        int czasDoNastepnejStacji = 0;
         while (true) {
+            System.out.println("stacja zrodlowa: " + stacjaZrodlowa.getNazwa());
+            StacjaKolejowa obecnaStacja = stacjaZrodlowa;
+            obliczDlugoscTrasy();
             for (StacjaKolejowa stacjaPosrednia : stacjePosrednie) {
-                int odleglosc = obecnaStacja.getPolaczenia().stream()
-                        .filter(item -> item.getStacjaDocelowa().getNazwa().equals(stacjaPosrednia.getNazwa()))
-                        .findFirst().get().getOdleglosc();
-                czasDoNastepnejStacji = (odleglosc / lokomotywa.getPredkosc()) * 1000;
-
-                int licznikCzasu = 0;
-                while(licznikCzasu < czasDoNastepnejStacji) {
-                    try {
-                        Thread.sleep(1000);
-                        wyliczPredkoscLokomotywy();
-                        wyliczCzasDoNastepnejStacji(odleglosc);
-                        licznikCzasu++;
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                int odleglosc = getOdlegloscOdStacji(obecnaStacja, stacjaPosrednia);
+                jedzDoNastepnejStacji(odleglosc);
+                System.out.println("stacja posrednia: " + stacjaPosrednia.getNazwa());
+                postojNaStacji(2L);
+                obecnaStacja = stacjaPosrednia;
             }
+            int odleglosdOdStacjiDocelowej = getOdlegloscOdStacji(obecnaStacja, stacjaDocelowa);
+            jedzDoNastepnejStacji(odleglosdOdStacjiDocelowej);
+            System.out.println("stacja docelowa " + stacjaDocelowa.getNazwa());
+            postojNaStacji(30L);
+            odwrocKierunek();
         }
 
     }
 
+    private void odwrocKierunek() {
+        StacjaKolejowa temp = stacjaZrodlowa;
+        stacjaZrodlowa = stacjaDocelowa;
+        stacjaDocelowa = temp;
+        Collections.reverse(stacjePosrednie);
+    }
+
+    private int getOdlegloscOdStacji(StacjaKolejowa obecnaStacja, StacjaKolejowa stacjaDocelowa) {
+        return obecnaStacja.getPolaczenia().stream()
+                .filter(item -> item.getStacjaDocelowa().getNazwa().equals(stacjaDocelowa.getNazwa()))
+                .findFirst().get().getOdleglosc();
+    }
+
+    private void postojNaStacji(long czas) {
+        try {
+            Thread.sleep(czas * 1000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void jedzDoNastepnejStacji(int odleglosc) {
+        int czasDoNastepnejStacji = wyliczCzasDoNastepnejStacji(odleglosc);
+        int trasaNaJednostkeCzasu = odleglosc * 1000 / czasDoNastepnejStacji;
+        int licznikCzasu = 0;
+        int pokonanaTrasaMIedzyStacjami = 0;
+        while (licznikCzasu < czasDoNastepnejStacji) {
+            try {
+                Thread.sleep(100);
+                wyliczPredkoscLokomotywy();
+                czasDoNastepnejStacji = wyliczCzasDoNastepnejStacji(odleglosc);
+                trasaNaJednostkeCzasu = odleglosc / czasDoNastepnejStacji;
+                pokonanaTrasa += trasaNaJednostkeCzasu;
+                pokonanaTrasaMIedzyStacjami += trasaNaJednostkeCzasu;
+                procentUkonczonejDrogi = pokonanaTrasa * 100 / dlugoscTrasy;
+                procentUkonczonejDrogiPomiedzyStacjami = pokonanaTrasaMIedzyStacjami * 100 / odleglosc;
+                licznikCzasu += 1000;
+
+//                System.out.println("pokonana trasa: " + procentUkonczonejDrogi);
+//                System.out.println("pokonana trasa miedzy stacjami: " + procentUkonczonejDrogiPomiedzyStacjami);
+
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     private int wyliczCzasDoNastepnejStacji(int odleglosc) {
-        return  (odleglosc / lokomotywa.getPredkosc()) * 1000;
+        return (odleglosc * 10 / lokomotywa.getPredkosc()) * 1000;
     }
 
     private void wyliczPredkoscLokomotywy() {
         Random random = new Random();
         int speed = random.nextInt(2);
         int procent = (lokomotywa.getPredkosc() * 3) / 100;
-        if(speed == 1) {
+        if (speed == 1) {
             lokomotywa.setPredkosc(lokomotywa.getPredkosc() - procent);
         } else {
             lokomotywa.setPredkosc(lokomotywa.getPredkosc() + procent);
