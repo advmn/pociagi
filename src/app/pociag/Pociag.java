@@ -127,6 +127,7 @@ public class Pociag implements Runnable {
             StacjaKolejowa obecnaStacja = stacjaZrodlowa;
             obliczDlugoscTrasy();
             for (StacjaKolejowa stacjaPosrednia : stacjePosrednie) {
+                System.out.println("pokonana trasa: " + procentUkonczonejDrogi);
                 int odleglosc = getOdlegloscOdStacji(obecnaStacja, stacjaPosrednia);
                 jedzDoNastepnejStacji(odleglosc);
                 System.out.println("stacja posrednia: " + stacjaPosrednia.getNazwa());
@@ -165,7 +166,6 @@ public class Pociag implements Runnable {
 
     private void jedzDoNastepnejStacji(int odleglosc) {
         int czasDoNastepnejStacji = wyliczCzasDoNastepnejStacji(odleglosc);
-        int trasaNaJednostkeCzasu = odleglosc * 1000 / czasDoNastepnejStacji;
         int licznikCzasu = 0;
         int pokonanaTrasaMIedzyStacjami = 0;
         while (licznikCzasu < czasDoNastepnejStacji) {
@@ -173,15 +173,14 @@ public class Pociag implements Runnable {
                 Thread.sleep(100);
                 wyliczPredkoscLokomotywy();
                 czasDoNastepnejStacji = wyliczCzasDoNastepnejStacji(odleglosc);
-                trasaNaJednostkeCzasu = odleglosc / czasDoNastepnejStacji;
+                int trasaNaJednostkeCzasu = odleglosc * 1000 / czasDoNastepnejStacji;
                 pokonanaTrasa += trasaNaJednostkeCzasu;
                 pokonanaTrasaMIedzyStacjami += trasaNaJednostkeCzasu;
                 procentUkonczonejDrogi = pokonanaTrasa * 100 / dlugoscTrasy;
                 procentUkonczonejDrogiPomiedzyStacjami = pokonanaTrasaMIedzyStacjami * 100 / odleglosc;
                 licznikCzasu += 1000;
 
-//                System.out.println("pokonana trasa: " + procentUkonczonejDrogi);
-//                System.out.println("pokonana trasa miedzy stacjami: " + procentUkonczonejDrogiPomiedzyStacjami);
+                System.out.println("pokonana trasa miedzy stacjami: " + procentUkonczonejDrogiPomiedzyStacjami);
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

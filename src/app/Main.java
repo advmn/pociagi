@@ -12,14 +12,8 @@ public class Main {
 //        Menu menu = new Menu();
         Scanner scanner = new Scanner(System.in);
 
-        TreeSet<Lokomotywa> lokomotywy = new TreeSet<>();
-        TreeSet<Pociag> pociagi = new TreeSet<>();
-
         List<StacjaKolejowa> stacje = new ArrayList<>();
 
-//        for (int i = 0; i < 100; i++) {
-//            stacje.add(new StacjaKolejowa(UUID.randomUUID().toString()));
-//        }
 
         Random numerStacji = new Random();
         Random iloścPolaczen = new Random();
@@ -41,29 +35,11 @@ public class Main {
 
         }
 
-//        stacje.forEach(stacja -> {
-//            int polaczenia = iloścPolaczen.nextInt(3);
-//            Stack<Integer> stosNumerkow = new Stack<>();
-//            for (int i = 0; i < polaczenia; i++) {
-//
-//                int odl = odleglosc.nextInt(200) + 10;
-//                int indeksStacji = numerStacji.nextInt(stacje.size());
-//                while (stosNumerkow.contains(indeksStacji) || indeksStacji == stacje.indexOf(stacja)) {
-//                    indeksStacji = numerStacji.nextInt(stacje.size());
-//                }
-//                stosNumerkow.push(indeksStacji);
-//                StacjaKolejowa stj = stacje.get(indeksStacji);
-//                stacja.dodajPolaczenie(stj, odl);
-//            }
-//        });
-
         StacjaKolejowa stacjaZrodlowa = stacje.get(0);
         StacjaKolejowa stacjaDocelowa = stacje.get(stacje.size() - 1);
         Lokomotywa lokomotywa = new Lokomotywa("Ciufa", new StacjaKolejowa("Czarnobyl"), stacjaZrodlowa, stacjaDocelowa, 10, 400000, 4, 30);
         List<StacjaKolejowa> stacjePosrednie = new ArrayList<>();
         Stack<StacjaKolejowa> stosOdwiedzonychStacji = new Stack<>();
-
-//        znajdzPolaczenie(stacjePosrednie, stacjaZrodlowa, stacjaDocelowa, stosOdwiedzonychStacji);
 
         for (int i = 1; i < stacje.size() - 1; i++) {
             stacjePosrednie.add(stacje.get(i));
