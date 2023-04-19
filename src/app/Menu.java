@@ -64,8 +64,14 @@ public class Menu {
     }
 
     private void dodajPociag() {
-        // Logika dodawania pociągu w zależności od zdefiniowanych wcześniej klas
-        // ...
+        boolean shouldContinue = true;
+        System.out.println("Dodawanie lokomotywe: ");
+        System.out.println("Nazwa lokomotywy: ");
+        String nazwaLokomotywy = scanner.nextLine();
+
+        while(shouldContinue) {
+            System.out.println("Dodaj Loko");;
+        }
     }
 
     private void wyswietlStacjeKolejowe() {

@@ -110,4 +110,12 @@ public class Lokomotywa {
             throw new RuntimeException("Nie można dodać więcej ładunku ponieważ, masa jest zbyt duża");
         }
     }
+
+    public int getPredkosc() {
+        return predkosc;
+    }
+
+    public void setPredkosc(int predkosc) {
+        this.predkosc = predkosc;
+    }
 }

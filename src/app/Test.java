@@ -9,7 +9,7 @@ public class Test {
 
         Lokomotywa test = new Lokomotywa("siema",  null, null, null, 10, 1000, 3, 1);
 
-        WagonPasazerski test1 = new WagonPasazerski(1.0, 2.0, test);
+//        WagonPasazerski test1 = new WagonPasazerski(1.0, 2.0, test);
 
     }
 }

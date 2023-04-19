@@ -2,6 +2,7 @@ package app;
 
 import app.pociag.Pociag;
 import app.pociag.lokomotywy.Lokomotywa;
+import app.pociag.wagony.WagonPasazerski;
 import app.stacje.StacjaKolejowa;
 
 import java.util.*;
@@ -9,7 +10,10 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 //        Menu menu = new Menu();
-//        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+
+        TreeSet<Lokomotywa> lokomotywy = new TreeSet<>();
+        TreeSet<Pociag> pociagi = new TreeSet<>();
 
         List<StacjaKolejowa> stacje = new ArrayList<>();
 
@@ -39,7 +43,7 @@ public class Main {
 
         StacjaKolejowa stacjaZrodlowa = stacje.get(numerStacji.nextInt(stacje.size()));
         StacjaKolejowa stacjaDocelowa = stacje.get(numerStacji.nextInt(stacje.size()));
-        Lokomotywa lokomotywa = new Lokomotywa("Ciufa", new StacjaKolejowa("Czarnobyl"), stacjaZrodlowa, stacjaDocelowa, 10, 400000, 4, 150);
+        Lokomotywa lokomotywa = new Lokomotywa("Ciufa", new StacjaKolejowa("Czarnobyl"), stacjaZrodlowa, stacjaDocelowa, 10, 40000, 4, 150);
         List<StacjaKolejowa> stacjePosrednie = new ArrayList<>();
         Stack<StacjaKolejowa> stosOdwiedzonychStacji = new Stack<>();
 
@@ -47,11 +51,24 @@ public class Main {
 
         Pociag pociag = new Pociag(lokomotywa, stacjaZrodlowa, stacjaDocelowa, stacjePosrednie);
 
+        WagonPasazerski wagonPasazerski = new WagonPasazerski(10000, 12000);
+        wagonPasazerski.dodajPasazerow(20);
+        WagonPasazerski wagonPasazerski1 = new WagonPasazerski(10000, 12000);
+        wagonPasazerski1.dodajPasazerow(20);
+        WagonPasazerski wagonPasazerski2 = new WagonPasazerski(10000, 12000);
+        wagonPasazerski2.dodajPasazerow(20);
+        WagonPasazerski wagonPasazerski3 = new WagonPasazerski(10000, 12000);
+        wagonPasazerski3.dodajPasazerow(20);
+        pociag.dodajWagon(wagonPasazerski);
+        pociag.dodajWagon(wagonPasazerski1);
+        pociag.dodajWagon(wagonPasazerski3);
+        pociag.dodajWagon(wagonPasazerski2);
+
         System.out.println("pociag");
 
 
 //        while (true) {
-//            System.out.println("\nMenu:");
+//            System.out.println("Menu:");
 //            System.out.println("1. Dodaj wagon");
 //            System.out.println("2. Wyświetl listę wagonów");
 //            System.out.println("3. Dodaj pociąg");
@@ -62,16 +79,16 @@ public class Main {
 //            System.out.println("8. Wyświetl listę połączeń");
 //            System.out.println("9. Wyszukaj połączenie");
 //            System.out.println("10. Wyjście");
-//
+
 //            System.out.print("Wybierz opcję: ");
 //            int wybor = scanner.nextInt();
 //
 //            switch (wybor) {
 //                case 1:
-//                    menu.dodajWagon();
+                    menu.dodajWagon();
 //                    break;
 //                case 2:
-//                    menu.wyswietlListeWagonow();
+                    menu.wyswietlListeWagonow();
 //                    break;
 //                case 3:
 //                    menu.dodajPociag();
@@ -101,7 +118,7 @@ public class Main {
 //                default:
 //                    System.out.println("Nieprawidłowy wybór. Spróbuj ponownie.");
 //            }
-//        }
+        }
     }
 
     private static void znajdzPolaczenie(List<StacjaKolejowa> stacje, StacjaKolejowa stacjaZrodlowa, StacjaKolejowa stacjaDocelowa, Stack<StacjaKolejowa> odwiedzoneStacje) {

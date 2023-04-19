@@ -12,7 +12,7 @@ public abstract class Wagon {
         this.numerIdentyfikacyjny = ++counter;
         this.wagePustegoWagonu = wagaPustegoWagonu;
         this.maksymalnaWagaWagonu = wagaPelnegoWagonu;
-        this.obecnaWagaWagonu = wagaPelnegoWagonu;
+        this.obecnaWagaWagonu = wagaPustegoWagonu;
     }
 
     public int getNumerIdentyfikacyjny() {
@@ -36,6 +36,25 @@ public abstract class Wagon {
     }
 
     public abstract void wyswietlInformacje();
+
+    public double getObecnaWagaWagonu() {
+        return obecnaWagaWagonu;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Wagon wagon = (Wagon) o;
+
+        return numerIdentyfikacyjny == wagon.numerIdentyfikacyjny;
+    }
+
+    @Override
+    public int hashCode() {
+        return numerIdentyfikacyjny;
+    }
 }
 
 
